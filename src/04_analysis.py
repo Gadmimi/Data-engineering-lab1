@@ -29,7 +29,15 @@ months_count = df_clean['Прирост'].count()
 # Считаем средний прирост
 mean_growth = df_clean['Прирост'].mean()
 
+result = df_clean[['Период', '2025', '2026', 'Прирост']]
+
 print("Данные по месяцам с разницей:")
 print(df_clean[['Период', '2025', '2026', 'Прирост']])
 
 print(f"\nСредний прирост за {months_count} мес.: {mean_growth:.2f}")
+
+
+result.to_parquet(
+    "s3://airport/analytics/flights_statistics.parquet",
+    storage_options=storage_options
+)
